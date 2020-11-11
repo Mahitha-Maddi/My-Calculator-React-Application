@@ -26,9 +26,13 @@ router.route('/').post((req, res) => {
         result = operand1 * operand2;
     }
     else if (operator == ("/")) {
-        result = operand1 / operand2;
+        if (operand2 != 0) {
+            result = operand1 / operand2;
+        }
     }
-
+    if (operator == ("/") && operand2 == 0) {
+        return;
+    }
     const newCalculation = new Calculations({
         _id: new mongoose.Types.ObjectId(), operand1: operand1, operand2: operand2,
         operator: operator, result: result
